@@ -7,7 +7,7 @@ async function ensureBucket(supabase: ReturnType<typeof getAdminClient>, bucket:
   if (!existing) {
     await supabase.storage.createBucket(bucket, {
       public: true,
-      allowedMimeTypes: ["image/*"],
+      allowedMimeTypes: ["image/*", "application/pdf"],
       fileSizeLimit: "5MB",
     });
   } else if (!existing.public) {

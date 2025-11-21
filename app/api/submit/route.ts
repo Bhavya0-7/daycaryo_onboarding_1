@@ -97,13 +97,16 @@ export async function POST(req: Request) {
         if (error) throw new Error(error.message);
       })());
     });
-    if (arr("doc_license").length) {
-      photoOps.push((async () => {
-        const { error } = await supabase
-          .from("daycare_documents")
-          .insert({ daycare_id: id, url: arr("doc_license")[0], doc_type: "license" });
-        if (error) throw new Error(error.message);
-      })());
+    const docs = arr("doc_license");
+    if (docs.length) {
+      docs.forEach((url) => {
+        photoOps.push((async () => {
+          const { error } = await supabase
+            .from("daycare_documents")
+            .insert({ daycare_id: id, url, doc_type: "license" });
+          if (error) throw new Error(error.message);
+        })());
+      });
     }
     if (photoOps.length) await Promise.all(photoOps);
 
