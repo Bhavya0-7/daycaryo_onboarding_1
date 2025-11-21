@@ -77,24 +77,33 @@ export async function POST(req: Request) {
 
     const id = data?.id as string;
 
-    const photoOps: PromiseLike<unknown>[] = [];
+    const photoOps: Promise<void>[] = [];
     const arr = (k: string) => (Array.isArray(body[k]) ? (body[k] as string[]) : []);
     arr("photo_indoor").forEach((url) => {
-      photoOps.push(supabase.from("daycare_photos_indoor").insert({ daycare_id: id, url }).then(() => undefined));
+      photoOps.push((async () => {
+        const { error } = await supabase.from("daycare_photos_indoor").insert({ daycare_id: id, url });
+        if (error) throw new Error(error.message);
+      })());
     });
     arr("photo_outdoor").forEach((url) => {
-      photoOps.push(supabase.from("daycare_photos_outdoor").insert({ daycare_id: id, url }).then(() => undefined));
+      photoOps.push((async () => {
+        const { error } = await supabase.from("daycare_photos_outdoor").insert({ daycare_id: id, url });
+        if (error) throw new Error(error.message);
+      })());
     });
     arr("photo_activity").forEach((url) => {
-      photoOps.push(supabase.from("daycare_photos_activity").insert({ daycare_id: id, url }).then(() => undefined));
+      photoOps.push((async () => {
+        const { error } = await supabase.from("daycare_photos_activity").insert({ daycare_id: id, url });
+        if (error) throw new Error(error.message);
+      })());
     });
     if (arr("doc_license").length) {
-      photoOps.push(
-        supabase
+      photoOps.push((async () => {
+        const { error } = await supabase
           .from("daycare_documents")
-          .insert({ daycare_id: id, url: arr("doc_license")[0], doc_type: "license" })
-          .then(() => undefined)
-      );
+          .insert({ daycare_id: id, url: arr("doc_license")[0], doc_type: "license" });
+        if (error) throw new Error(error.message);
+      })());
     }
     if (photoOps.length) await Promise.all(photoOps);
 
