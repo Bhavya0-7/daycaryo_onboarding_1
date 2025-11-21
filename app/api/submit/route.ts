@@ -16,7 +16,7 @@ function mapToInsert(body: Record<string, unknown>) {
     gender,
     graduation_university: g("owner_education") || null,
     experience_years: g("owner_experience_years") ? Number(g("owner_experience_years")) : null,
-    profile_photo_url: null,
+    profile_photo_url: Array.isArray(g("owner_photo")) ? ((g("owner_photo") as string[])[0] || null) : null,
 
     daycare_name: g("daycare_name"),
     year_established: Number(g("daycare_year")),
