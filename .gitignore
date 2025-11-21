@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.vercel/
+dist/
+out/
+coverage/
+.cache/
+.DS_Store
+*.log
+.env*
+/.idea/
+/.vscode/

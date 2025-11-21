@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
+
+html, body { height: 100%; }
+body { font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+
+.brand {
+  font-family: 'Quicksand', 'Poppins', ui-sans-serif, system-ui;
+  font-weight: 700;
+  background-image: linear-gradient(90deg, #AB4FFC, #B01EB8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-pastel {
+  @apply fixed inset-0 -z-10;
+  background:
+    radial-gradient(1200px 900px at 20% 20%, #d6b8ff, transparent 60%),
+    radial-gradient(1200px 900px at 80% 30%, #f9c7e9, transparent 60%),
+    linear-gradient(120deg, #fdf2f8 0%, #ede9fe 100%);
+}
+
+.glass {
+  @apply bg-white/75 border border-white/50 backdrop-blur-lg shadow-glass rounded-xl;
+}
+
+.glass-landing {
+  @apply bg-white/40 border border-white/60 backdrop-blur-2xl rounded-[40px] shadow-glass;
+}
+
+.nav-glass {
+  @apply fixed top-0 left-0 right-0 z-20 mx-auto max-w-6xl px-6 py-3 rounded-full bg-white/25 border border-white/50 backdrop-blur-xl;
+}
+
+.hover-neon {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+.hover-neon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(171, 79, 252, 0.35), 0 0 24px rgba(176, 30, 184, 0.25);
+}
+
+.soft-glow {
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+.enter-soft {
+  animation: enter-soft 450ms ease both;
+}
+@keyframes enter-soft {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bg-hero {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background-position: center;
+  background-size: cover;
+  filter: blur(2px);
+}
+
+.bg-hero-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  background-image: radial-gradient(900px 600px at 15% 20%, rgba(214,184,255,0.5), transparent 60%),
+    radial-gradient(900px 600px at 85% 30%, rgba(249,199,233,0.5), transparent 60%),
+    linear-gradient(120deg, rgba(253,242,248,0.6) 0%, rgba(237,233,254,0.6) 100%);
+}
+
+.card {
+  @apply p-4 bg-white/85 rounded-xl border border-primary/20 shadow-sm;
+}
+.card h3 { @apply text-lg font-semibold mb-1; }
+.card p { @apply text-gray-600; }
+
+.btn-primary { @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-gradient-to-r from-primary to-secondary font-semibold; }
+.btn-secondary { @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-primary bg-white border border-primary/30 font-semibold; }
+.btn-success { @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-green-600 font-semibold; }
+
+.input { @apply w-full px-4 py-3 rounded-xl bg-white/90 border border-primary/25 outline-none; }
+.input:focus { box-shadow: 0 0 0 3px rgba(168,85,247,0.18); border-color: theme('colors.primary'); }
+
+.section-title { @apply text-center text-2xl font-bold; }
+.section-subtitle { @apply text-center text-gray-500 mb-4; }
